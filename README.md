@@ -1,0 +1,3 @@
+- Dynamic repository
+- Simple IOC container, Dependency Injection
+- Auto install database connection driver
