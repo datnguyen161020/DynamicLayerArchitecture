@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 namespace DynamicLayerArchitecture
 {
-    // Define the child interface that extends the parent interface
     [Repository]
     public interface IRepository
     {
@@ -27,11 +26,11 @@ namespace DynamicLayerArchitecture
             
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             typeof(Program).GetCustomAttributes(false);
-            var childInterface = DynamicContainer.Create(typeof(IRepository)) as IRepository;
+            var repository = DynamicContainer.Create(typeof(IRepository)) as IRepository;
             var watch = new Stopwatch();
             watch.Start();
             Console.WriteLine(GC.GetTotalMemory(true));
-            var result = childInterface?.TestMethod();
+            var result = repository?.TestMethod();
             Console.WriteLine(watch.ElapsedMilliseconds);
             Console.WriteLine(GC.GetTotalMemory(true));
             Console.WriteLine("{0}", JsonConvert.SerializeObject(result));
