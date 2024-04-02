@@ -34,7 +34,8 @@ namespace DynamicLayerArchitecture.Config
         private static readonly Dictionary<string, string> DriverDictionary = new Dictionary<string, string>
         {
             { "SqlClient", "SqlClient.SqlConnection" },
-            { "MySqlConnector", "MySqlConnector.MySqlConnection" }
+            { "MySqlConnector", "MySqlConnector.MySqlConnection" },
+            { "Oracle.ManagedDataAccess.Core", "Oracle.ManagedDataAccess.Client.OracleConnection" }
         };
         public static void InstallDriver()
         {
@@ -177,7 +178,7 @@ namespace DynamicLayerArchitecture.Config
                         () => Activator.CreateInstance(connectionType,
                             DynamicContainer.GetConfiguration<string>("connectionString")));
                 }
-                else
+                else if (!dllPath.Contains("NETCore") && !dllPath.Contains("NETFramework"))
                 {
                     Assembly.Load(File.ReadAllBytes(dllPath));
                 }

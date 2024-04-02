@@ -21,14 +21,14 @@ namespace DynamicLayerArchitecture
     {
         private static void Main()
         {
+            var watch = new Stopwatch();
+            watch.Start();
             DynamicContainer.Configuration["SqlDriver"] = "MySqlConnector";
             DynamicContainer.Configuration["connectionString"] = "Server=localhost; Port = 3308; User=root; Database=sys; password=123456;";
             
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             typeof(Program).GetCustomAttributes(false);
             var repository = DynamicContainer.Create(typeof(IRepository)) as IRepository;
-            var watch = new Stopwatch();
-            watch.Start();
             Console.WriteLine(GC.GetTotalMemory(true));
             var result = repository?.TestMethod();
             Console.WriteLine(watch.ElapsedMilliseconds);

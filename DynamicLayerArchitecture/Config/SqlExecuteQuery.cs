@@ -46,7 +46,7 @@ namespace DynamicLayerArchitecture.Config
                 foreach (var resultObject in resultGeneric)
                 {
                     var jObject = JObject.Parse(JsonConvert.SerializeObject(resultObject));
-                    var value = $"'{jObject.First.Values().FirstOrDefault()}'";
+                    var value = $"'{(jObject.First ?? throw new InvalidOperationException()).Values().FirstOrDefault()}'";
                     if (values.Length > 1) values.Append(',');
                     values.Append(value);
                 }
